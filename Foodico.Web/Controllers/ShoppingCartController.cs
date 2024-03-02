@@ -25,6 +25,19 @@ namespace Foodico.Web.Controllers
             return View(await LoadCart());
         }
 
+        public async Task<IActionResult> CheckoutIndex()
+        {   OrderDto orderDto = new OrderDto();
+            orderDto.Cart = await LoadCart();
+            return View("Checkout", orderDto);
+        }
+
+        public async Task<IActionResult> PaymentIndex(OrderDto orderDto,string cart)
+        {
+            CartDto cartDto = Newtonsoft.Json.JsonConvert.DeserializeObject<CartDto>(cart);
+            orderDto.Cart = cartDto;
+            return View("Checkout", orderDto);
+        }
+
         private async Task<CartDto> LoadCart()
         {
             var userId = User.Claims.Where(x=>x.Type==JwtRegisteredClaimNames.Sub).FirstOrDefault()?.Value;
