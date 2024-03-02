@@ -1,0 +1,166 @@
+﻿@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = null;
+    var product = Model.Product;
+    var productList = Model.RelatedProducts;
+}
+<!DOCTYPE html>
+<html lang="zxx">
+
+@Html.Partial("_HeadPartialView")
+
+<body>
+   
+    @Html.Partial("_OffCanvasPartialView")
+    <!-- Offcanvas Menu End -->
+    @Html.Partial("_HeaderPartialView")
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Product Detail</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a asp-controller="Home" asp-action="Index">Home</a>
+                        <a asp-controller="Shop" asp-action="Index">Shop</a>
+                        <span>@product.Name</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Shop Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__img">
+                        <div class="product__details__big__img">
+                            <img class="big_img" src="@product.ImageUrl" alt="">
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <div class="product__label">@product.CategoryName</div>
+                        <h4>@product.Name</h4>
+                        <h5>@product.Price $</h5>
+                        <p>
+                            @product.Description
+                        </p>
+                        <form asp-controller="ShoppingCart" asp-action="UpdateCart" method="post">
+                            <div class="product__details__option">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="number" name="quantity" value="1" min="1">
+
+                                    </div>
+                                </div>
+                                <input type="hidden" name="productId" value="@product.ProductId" />
+                                <button type="submit" class="primary-btn">Add to cart</button>
+                                <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="product__details__tab">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <p>
+                                        "Welcome to Our Bakery's Pastry Selection!
+                                        Indulge in our artisanal pastries crafted with the finest ingredients
+                                        sourced locally and internationally. From classic croissants and decadent
+                                        éclairs to mouthwatering cupcakes, each treat is a masterpiece of flavor.
+                                        Don't miss our specialty options, including vegan and gluten-free pastries.
+                                        Visit us today to experience the magic of Our Bakery's creations!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <p>
+                                        "At Our Bakery, we take immense pride in the meticulous craftsmanship that goes into crafting each of our pastries.
+                                        Our dedicated team of pastry chefs follows precise recipes and techniques to ensure consistency and quality in every 
+                                        batch. From hand-rolling dough to piping delicate fillings, every step of the process is executed with care and 
+                                        attention to detail. Moreover, cleanliness is of utmost importance to us. Our bakery adheres to strict sanitation 
+                                        protocols, with our kitchen maintained to the highest standards of cleanliness and hygiene. We believe that a clean 
+                                        environment is essential for producing exceptional pastries, and we spare no effort in upholding these standards. 
+                                        When you enjoy a pastry from Our Bakery, you can trust that it has been made with skill, passion, and the utmost 
+                                        commitment to cleanliness."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Details Section End -->
+    <!-- Related Products Section Begin -->
+    <section class="related-products spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <h2>Related Products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="related__products__slider owl-carousel">
+                    @foreach (var item in productList)
+                    {
+                        <div class="col-lg-3">
+                            <div class="product__item">
+                                <a href="@Url.Action("ProductDetails", "Shop", new { id = item.ProductId })">
+                                <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                    <div class="product__label">
+                                        <span>@item.CategoryName</span>
+                                    </div>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="@Url.Action("ProductDetails", "Shop", new { id = item.ProductId })">@item.Name</a></h6>
+                                    <div class="product__item__price">$@item.Price.ToString("0.00")</div>
+                                    <div class="cart_add">
+                                        <a href="#">Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section End -->
+    @Html.Partial("_FooterPartialView")
+   
+    @Html.Partial("_ScriptsPartialView")
+</body>
+
+</html>
