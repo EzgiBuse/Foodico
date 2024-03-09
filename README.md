@@ -61,4 +61,48 @@ As an admin, you have additional features to manage the Foodico platform:
 - **Update Product:** Modify existing product information, such as price, availability, or description.
 - **Delete Product:** Remove products from the platform that are no longer available or relevant.
 
+ # Project Showcase
+
+### Video Preview
+
+[![Watch the video](https://img.youtube.com/vi/7JwP8k1c0T8/0.jpg)](https://www.youtube.com/watch?v=7JwP8k1c0T8)
+
+### Screenshots
+
+### Home Page
+![Screenshot 1](FoodicoPhotos/Homepage1.PNG)
+![Screenshot 2](FoodicoPhotos/Homepage2.PNG)
+![Screenshot 3](FoodicoPhotos/Homepage3.PNG)
+![Screenshot 4](FoodicoPhotos/Homepage4.PNG)
+
+### Login Panel
+
+![Screenshot 5](FoodicoPhotos/Login.PNG)
+
+### Register Panel
+![Screenshot 6](FoodicoPhotos/Register.PNG)
+
+### Shop
+![Screenshot 7](FoodicoPhotos/Shop.PNG)
+
+### Product Page
+![Screenshot 8](FoodicoPhotos/ProductDetail.PNG)
+
+### Shopping Cart
+![Screenshot 9](FoodicoPhotos/Cart.PNG)
+
+### Checkout 
+![Screenshot 10](FoodicoPhotos/Checkout.PNG)
+
+### Contact
+![Screenshot 11](FoodicoPhotos/Contact.PNG)
+
+### Email Confirmation
+![Screenshot 12](FoodicoPhotos/FoodicoEmail.PNG)
+
+### Toastr Notification
+![Screenshot 13](FoodicoPhotos/Toastr.PNG)
+
+
+
   
