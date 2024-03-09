@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Foodico.Services.CouponAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -43,6 +44,8 @@ namespace Foodico.Services.CouponAPI.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize]
+
         public ResponseDto Get(int id)
         {
             try
@@ -63,6 +66,7 @@ namespace Foodico.Services.CouponAPI.Controllers
 
         [HttpGet]
         [Route("GetByCode/{code}")]
+        [Authorize]
         public ResponseDto Get(string code)
         {
             try
@@ -94,6 +98,18 @@ namespace Foodico.Services.CouponAPI.Controllers
                 Coupon obj = _mapper.Map<Coupon>(couponDto);
                 _db.Coupons.Add(obj);
                 _db.SaveChanges();
+
+               
+                var options = new Stripe.CouponCreateOptions
+                {
+                   
+                    Name=couponDto.CouponCode,
+                    Currency= "usd",
+                    Id=couponDto.CouponCode,
+                    AmountOff = (long)(couponDto.DiscountAmount*100)
+                };
+                var service = new Stripe.CouponService();
+                service.Create(options);
 
                 _responseDto.Result=_mapper.Map<CouponDto>(obj);
             }
@@ -137,7 +153,9 @@ namespace Foodico.Services.CouponAPI.Controllers
                 _db.Coupons.Remove(obj);
                 _db.SaveChanges();
 
-               
+                var service = new Stripe.CouponService();
+                service.Delete(obj.CouponCode);
+
             }
             catch (Exception ex)
             {

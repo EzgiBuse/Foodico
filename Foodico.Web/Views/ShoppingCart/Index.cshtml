@@ -13,7 +13,13 @@
    
 @Html.Partial("_OffCanvasPartialView")
    @Html.Partial("_HeaderPartialView")
-    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var message = '@TempData["NotificationMessage"]';
+            var type = '@TempData["NotificationType"]';
+            toastr[type](message);
+        });
+    </script>
     <!-- Shopping Cart Section Begin -->
     @if(Model.CartHeader!= null && Model.CartHeader.CartTotal > 0)
     {
@@ -65,18 +71,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="cart__discount">
@@ -105,7 +99,7 @@
                         <ul>
                             <li>Subtotal <span> @string.Format("{0:c}",Model.CartHeader.CartTotal)</span></li>
                            @*  @if(Model.CartHeader.Discount > 0)
-							 *@{
+							 *@
                                 <li>Discount <span> @string.Format("{0:c}", Model.CartHeader.Discount)</span></li>
 							
                            

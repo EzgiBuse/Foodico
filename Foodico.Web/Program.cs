@@ -13,17 +13,21 @@ builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddHttpClient<IOrderService, OrderService>();
 builder.Services.AddMemoryCache();
 Standard.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 Standard.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 Standard.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 Standard.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartAPI"];
+Standard.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
+
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt =>
 {
     opt.ExpireTimeSpan = TimeSpan.FromHours(24);

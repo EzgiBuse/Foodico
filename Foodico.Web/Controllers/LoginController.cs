@@ -40,10 +40,19 @@ namespace Foodico.Web.Controllers
                 LoginResponseDto loginResponse = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
                 await SignInUser(loginResponse);
                 _tokenProvider.SetToken(loginResponse.Token);
-
+                TempData["NotificationType"] = "success";
+                TempData["NotificationMessage"] = "Welcome!";
+                
                 return RedirectToAction("Index","Home");
             }
-            return View();
+            else
+            {
+                TempData["NotificationType"] = "error";
+                TempData["NotificationMessage"] = "Email or password is incorrect"; 
+                
+                return RedirectToAction("Login");
+            }
+            //return View();
 
         }
 

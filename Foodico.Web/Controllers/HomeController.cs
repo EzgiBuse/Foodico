@@ -24,11 +24,8 @@ namespace Foodico.Web.Controllers
         {
             try
             {
-                 List<ProductDto> productList = new List<ProductDto>();
-                // Try to get the product list from the cache
-                //  if (!_memoryCache.TryGetValue("ProductList", out productList))
-                // {
-                // If the product list is not in the cache, retrieve it from the service
+                List<ProductDto> productList = new List<ProductDto>();
+               
                 ResponseDto response = await _productService.GetAllProductsAsync();
 
                     if (response != null && response.Result != null)
@@ -38,7 +35,7 @@ namespace Foodico.Web.Controllers
                         productList = JsonConvert.DeserializeObject<List<ProductDto>>(jsonString);
 
                     }
-                //  }
+               
                 return View(productList);
             }
             catch (Exception ex)

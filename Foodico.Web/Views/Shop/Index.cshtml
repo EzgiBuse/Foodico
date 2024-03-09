@@ -18,6 +18,13 @@
     <!-- Offcanvas Menu End -->
     <!-- Header Section Begin -->
     @Html.Partial("_HeaderPartialView")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var message = '@TempData["NotificationMessage"]';
+            var type = '@TempData["NotificationType"]';
+            toastr[type](message);
+        });
+    </script>
     <!-- Header Section End -->
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -35,7 +42,7 @@
     <!-- Breadcrumb End -->
     <!-- Shop Section Begin -->
     
-    <section class="shop spad" style="padding-bottom: 10px;">
+    <section class="shop spad" style="padding-bottom: 0px;">
         <div class="container">
             <div class="shop__option">
                 <form asp-action="FilterAndSort" method="get" class="row" id="filterAndSortForm">
@@ -66,7 +73,7 @@
 
 
             <!-- Shop Section Begin -->
-           <section class="shop spad">
+    <section class="shop spad" style="padding-top: 0px;">
                 <div class="container">
                     @for (int i = 0; i < Model.Count; i += 3)
                     {
@@ -84,10 +91,9 @@
                                         </div>
                                         <div class="product__item__text">
                                             <h6><a href="#">@Model[j].Name</a></h6>
-                                            <div class="product__item__price">$@Model[j].Price.ToString("0.00")</div>
-                                            <div class="cart_add">
-                                                <a href="#">Add to cart</a>
-                                            </div>
+                                            <h6><a href="#">$@Model[j].Price.ToString("0.00")</a></h6>
+                                          
+                                           
                                         </div>
                                     </div>
                                 </div>

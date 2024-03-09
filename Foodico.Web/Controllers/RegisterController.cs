@@ -22,17 +22,30 @@ namespace Foodico.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegistrationRequestDto registrationRequestDto)
         {
-            //registrationRequestDto.Role = "CUSTOMER";
-            //cont here
-            ResponseDto result = await _authService.RegisterAsync(registrationRequestDto);
-            if (result.IsSuccess)
+            try
             {
-               
-               return RedirectToAction("Login", "Login");
-              
-            }
-            return View("Register","Register");
+                ResponseDto result = await _authService.RegisterAsync(registrationRequestDto);
 
+                if (result.IsSuccess)
+                {
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationMessage"] = "Registration successful";
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationMessage"] = "Registration failed";
+                    return RedirectToAction("Register");
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                TempData["NotificationType"] = "error";
+                TempData["NotificationMessage"] = "An error occurred during registration. Please try again later.";
+                return RedirectToAction("Register");
+            }
         }
     }
 }

@@ -6,12 +6,26 @@
 <!DOCTYPE html>
 <html lang="en">
 @Html.Partial("_HeadPartialView")
+<script type="text/javascript">
+    $(document).ready(function () {
+        var message = '@TempData["NotificationMessage"]';
+        var type = '@TempData["NotificationType"]';
+        toastr[type](message);
+    });
+</script>
 <body>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        #toast-container .toast-error {
+            background-color: #dc3545;
+        }
+
+        #toast-container .toast-success {
+            background-color: #28a745;
+        }
         body {
             background-image: url('/cake-main/img/hero/hero-1.jpg');
             background-size: cover;

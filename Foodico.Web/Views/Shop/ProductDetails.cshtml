@@ -15,6 +15,13 @@
     @Html.Partial("_OffCanvasPartialView")
     <!-- Offcanvas Menu End -->
     @Html.Partial("_HeaderPartialView")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var message = '@TempData["NotificationMessage"]';
+            var type = '@TempData["NotificationType"]';
+            toastr[type](message);
+        });
+    </script>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -62,10 +69,12 @@
                                         <input type="number" name="quantity" value="1" min="1">
 
                                     </div>
+                                  
                                 </div>
+                                &emsp;&emsp;&emsp;&emsp;
                                 <input type="hidden" name="productId" value="@product.ProductId" />
                                 <button type="submit" class="primary-btn">Add to cart</button>
-                                <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                               
                             </div>
                         </form>
 
@@ -144,13 +153,12 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="@Url.Action("ProductDetails", "Shop", new { id = item.ProductId })">@item.Name</a></h6>
-                                    <div class="product__item__price">$@item.Price.ToString("0.00")</div>
-                                    <div class="cart_add">
-                                        <a href="#">Add to cart</a>
+                                        <h6 style="color: black;">$@item.Price.ToString("0.00")</h6>
                                     </div>
+                                   
                                 </div>
                             </div>
-                        </div>
+                       
                     }
                 </div>
             </div>

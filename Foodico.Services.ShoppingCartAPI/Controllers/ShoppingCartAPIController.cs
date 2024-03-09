@@ -3,6 +3,7 @@ using Foodico.Services.ShoppingCartAPI.Data;
 using Foodico.Services.ShoppingCartAPI.Models;
 using Foodico.Services.ShoppingCartAPI.Models.Dto;
 using Foodico.Services.ShoppingCartAPI.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
         }
 
         [HttpGet("GetCart/{userId}")]
+        [Authorize]
         public async Task<ResponseDto> GetCart(string userId)
         {
             try
@@ -68,6 +70,7 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
         }
 
         [HttpPost("ApplyCoupon")]
+        [Authorize]
         public async Task<object> ApplyCoupon([FromBody] CartDto cartDto)
         {
             try
@@ -89,6 +92,7 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
         }
 
         [HttpPost("RemoveCoupon")]
+        [Authorize]
         public async Task<object> RemoveCoupon([FromBody] CartDto cartDto)
         {
             try
@@ -110,6 +114,7 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
         }
 
         [HttpPost("UpdateCart")]
+        [Authorize]
         public async Task<ResponseDto> UpdateCart(CartDto cartDto)
         {
             try
@@ -155,6 +160,7 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
             return _responseDto;
         }
         [HttpPost("RemoveCart")]
+        [Authorize]
         public async Task<ResponseDto> RemoveCart([FromBody]int cartDetailsId)
         {
             try

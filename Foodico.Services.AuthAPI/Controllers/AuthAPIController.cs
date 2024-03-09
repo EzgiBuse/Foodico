@@ -1,4 +1,5 @@
 ﻿using Foodico.Services.AuthAPI.Models.Dto;
+using Foodico.Services.AuthAPI.RabbitMQSender;
 using Foodico.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,23 +12,27 @@ namespace Foodico.Services.AuthAPI.Controllers
     {
         private readonly IAuthService _authService;
         protected ResponseDto _responseDto;
-
-        public AuthAPIController(IAuthService authService)
+        private readonly IRabbitMQAuthMessageSender _messageBus;
+        private readonly IConfiguration _configuration;
+        public AuthAPIController(IAuthService authService,IRabbitMQAuthMessageSender messageBus,IConfiguration configuration )
         {
             _authService = authService;
             _responseDto = new();
+            _configuration = configuration;
+            _messageBus = messageBus;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDto registrationRequestDto)
         {
             var errorMessage = await _authService.Register(registrationRequestDto);
-            if(!string.IsNullOrEmpty(errorMessage))
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 _responseDto.IsSuccess = false;
                 _responseDto.Message = errorMessage;
                 return BadRequest(_responseDto);
             }
+          
                 return Ok(_responseDto);
             
         }
@@ -43,6 +48,7 @@ namespace Foodico.Services.AuthAPI.Controllers
                 return BadRequest(_responseDto);
             }
             _responseDto.Result= loginresponse;
+          
             return Ok(_responseDto);
         }
 
@@ -50,7 +56,7 @@ namespace Foodico.Services.AuthAPI.Controllers
         public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto registrationRequestDto)
         {
             var assignrolesuccess = await _authService.AssignRole(registrationRequestDto.Email, registrationRequestDto.Role.ToUpper());
-            if (assignrolesuccess)
+            if (!assignrolesuccess)
             {
                 _responseDto.IsSuccess = false;
                 _responseDto.Message = "Error";

@@ -1,5 +1,6 @@
 using Foodico.Services.AuthAPI.Data;
 using Foodico.Services.AuthAPI.Models;
+using Foodico.Services.AuthAPI.RabbitMQSender;
 using Foodico.Services.AuthAPI.Service;
 using Foodico.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkSto
 builder.Services.AddControllers();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRabbitMQAuthMessageSender, RabbitMQAuthMessageSender>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
