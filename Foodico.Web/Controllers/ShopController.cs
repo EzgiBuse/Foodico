@@ -37,6 +37,7 @@ namespace Foodico.Web.Controllers
                 if (!_memoryCache.TryGetValue("ProductList", out productList))
                 {
                     // If the product list is not in the cache, retrieve it from the service
+
                     ResponseDto response = await _productService.GetAllProductsAsync();
 
                     if (response != null && response.Result != null)
