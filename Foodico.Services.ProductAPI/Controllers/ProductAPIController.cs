@@ -136,6 +136,7 @@ namespace Foodico.Services.ProductAPI.Controllers
         {
             try
             {
+
                 Product obj = _mapper.Map<Product>(productDto);
                 _db.Products.Update(obj);
                 _db.SaveChanges();

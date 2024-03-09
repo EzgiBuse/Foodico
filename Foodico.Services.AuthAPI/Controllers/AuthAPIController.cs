@@ -55,6 +55,7 @@ namespace Foodico.Services.AuthAPI.Controllers
         [HttpPost("assignRole")]
         public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto registrationRequestDto)
         {
+
             var assignrolesuccess = await _authService.AssignRole(registrationRequestDto.Email, registrationRequestDto.Role.ToUpper());
             if (!assignrolesuccess)
             {

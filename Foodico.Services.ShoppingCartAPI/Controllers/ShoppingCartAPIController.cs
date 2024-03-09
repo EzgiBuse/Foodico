@@ -179,7 +179,6 @@ namespace Foodico.Services.ShoppingCartAPI.Controllers
             }
             catch (Exception ex)
             {
-
                 _responseDto.IsSuccess = false;
                 _responseDto.Message = ex.Message.ToString();
             }
