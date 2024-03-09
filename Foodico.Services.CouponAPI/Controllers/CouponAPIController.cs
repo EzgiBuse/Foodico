@@ -24,7 +24,6 @@ namespace Foodico.Services.CouponAPI.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        [Authorize(Roles ="ADMIN")]
         public ResponseDto Get()
         {
             try
@@ -44,8 +43,7 @@ namespace Foodico.Services.CouponAPI.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [Authorize]
-
+        
         public ResponseDto Get(int id)
         {
             try
@@ -66,7 +64,7 @@ namespace Foodico.Services.CouponAPI.Controllers
 
         [HttpGet]
         [Route("GetByCode/{code}")]
-        [Authorize]
+        
         public ResponseDto Get(string code)
         {
             try
@@ -90,7 +88,7 @@ namespace Foodico.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
+       
         public ResponseDto Post([FromBody] CouponDto couponDto)
         {
             try
@@ -123,7 +121,7 @@ namespace Foodico.Services.CouponAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "ADMIN")]
+       
         public ResponseDto Put([FromBody] CouponDto couponDto)
         {
             try
@@ -144,7 +142,7 @@ namespace Foodico.Services.CouponAPI.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "ADMIN")]
+      
         public ResponseDto Delete(int id)
         {
             try

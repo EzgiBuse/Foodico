@@ -24,7 +24,8 @@ namespace Foodico.Services.EmailAPI.Services
                 {
                     EnableSsl = true,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("herbaezgi1@gmail.com", "eorq bxme dxqi fteu")
+                   //credentials here
+                    Credentials = new NetworkCredential("test@gmail.com", "test")
                 };
                 string emailTemplatePath = "Views/OrderEmailTemplate.html";
                 string emailTemplate = File.ReadAllText(emailTemplatePath);
@@ -32,7 +33,7 @@ namespace Foodico.Services.EmailAPI.Services
 
                 return client.SendMailAsync(
                      new MailMessage(
-                        from: "herbaezgi1@gmail.com",
+                        from: "test@gmail.com",
                         to: email,
                         subject: "Order Confirmation",
                         body: emailTemplate)
