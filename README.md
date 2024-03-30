@@ -7,10 +7,9 @@ Foodico is an e-commerce web application of a bakery where customers can order p
 Foodico is built using the following technologies and frameworks:
 
 - **Frontend**:
-  - HTML
-  - CSS
-  - JavaScript
-  - jQuery
+  -ASP.NET MVC
+  -(Premade template)
+  
 
 - **Backend**:
   - .NET 7
