@@ -14,6 +14,7 @@ Foodico is built using the following technologies and frameworks:
 - **Backend**:
   - .NET 7
   - C#
+  - ASP.Net Web API
   - Entity Framework Core for ORM (Code First approach)
   - MSSQL for the database
   - AutoMapper for object-to-object mapping
